@@ -8,7 +8,7 @@ interface Content {
   text: string;
 }
 
-const backendUrl = 'http://your-adonis-backend-ip:3333/api'; // Replace with your backend IP
+const backendUrl = 'http://localhost:3333/api';
 
 const App = () => {
   const [query, setQuery] = useState('');
