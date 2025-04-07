@@ -12,23 +12,19 @@ Running Locally
 
 1. Clone: `git clone https://github.com/mmachi11233/AI_chatbot`
 
-2. Navigate: `cd AI_Chatbot`
+2. Install: `npm install` and install Nodejs version 18 or higher
 
-3. Install: `npm install` and install Nodejs version 18 or higher
+3. Environment: Create `.env` set necessary variables (e.g., `PORT`, `DATABASE_URL`, API keys).
 
-4. Environment: Create `.env` based on and set necessary variables (e.g., `PORT`, `DATABASE_URL`, API keys).
+4. Run: `adonis serve --dev`
 
-(Set up secrets in your repository (e.g., hosting API key, database URL)
-
-5. Run: `npm run dev`
-
-6. Run front end: npm start
+5. Run front end: npm start
 
 
 Deployment
 
 
-· Containerized app using Docker by creating a docker file
+· Containerized app using Docker by creating a docker container
 
 · Hosted code with GitHub which serves as a central version control system
 
