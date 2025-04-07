@@ -17,7 +17,7 @@ const App: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query: message }), // Send 'query' in the request body
+        body: JSON.stringify({ query: message }),
       });
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
