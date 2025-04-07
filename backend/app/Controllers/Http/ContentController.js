@@ -3,91 +3,51 @@
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
-
+const Content = use('App/Models/Content')
 /**
  * Resourceful controller for interacting with contents
  */
 class ContentController {
-  /**
-   * Show a list of all contents.
-   * GET contents
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async index ({ request, response, view }) {
+  async index ({ response }) {
+    const contents = await Content.find({})
+    return response.json(contents)
   }
 
-  /**
-   * Render a form to be used for creating a new content.
-   * GET contents/create
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async create ({ request, response, view }) {
-  }
-
-  /**
-   * Create/save a new content.
-   * POST contents
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
   async store ({ request, response }) {
+    const { title, text } = request.post()
+    const content = new Content({ title, text })
+    await content.save()
+    return response.status(201).json(content)
   }
 
-  /**
-   * Display a single content.
-   * GET contents/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async show ({ params, request, response, view }) {
+  async show ({ params, response }) {
+    const content = await Content.findById(params.id)
+    if (!content) {
+      return response.status(404).json({ message: 'Content not found' })
+    }
+    return response.json(content)
   }
 
-  /**
-   * Render a form to update an existing content.
-   * GET contents/:id/edit
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async edit ({ params, request, response, view }) {
-  }
-
-  /**
-   * Update content details.
-   * PUT or PATCH contents/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
   async update ({ params, request, response }) {
+    const content = await Content.findById(params.id)
+    if (!content) {
+      return response.status(404).json({ message: 'Content not found' })
+    }
+    const { title, text } = request.post()
+    content.title = title
+    content.text = text
+    content.updatedAt = Date.now()
+    await content.save()
+    return response.json(content)
   }
 
-  /**
-   * Delete a content with id.
-   * DELETE contents/:id
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   */
-  async destroy ({ params, request, response }) {
+  async destroy ({ params, response }) {
+    const content = await Content.findById(params.id)
+    if (!content) {
+      return response.status(404).json({ message: 'Content not found' })
+    }
+    await content.remove()
+    return response.status(204).send()
   }
 }
-
 module.exports = ContentController

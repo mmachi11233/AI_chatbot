@@ -65,7 +65,7 @@ module.exports = {
     | Offset to be used for returning subdomains for a given request.For
     | majority of applications it will be 2, until you have nested
     | sudomains.
-    | cheatsheet.adonisjs.com      - offset - 2
+    | cheatsheet.adonisjs.com     - offset - 2
     | virk.cheatsheet.adonisjs.com - offset - 3
     |
     */
@@ -239,5 +239,27 @@ module.exports = {
     sameSite: false,
     path: '/',
     maxAge: 7200
-  }
+  },
+
+  /*
+  |--------------------------------------------------------------------------
+  | Application Providers
+  |--------------------------------------------------------------------------
+  |
+  | Here you can register the application service providers. Feel free to
+  | remove providers you don't use.
+  |
+  */
+  providers: [
+    '@adonisjs/framework/providers/AppProvider',
+    '@adonisjs/auth/providers/AuthProvider',
+    '@adonisjs/bodyparser/providers/BodyParserProvider',
+    '@adonisjs/cors/providers/CorsProvider',
+    '@adonisjs/lucid/providers/DatabaseProvider', // Keep this if you are using Lucid
+    '@adonisjs/validator/providers/ValidatorProvider',
+    '@adonisjs/antl/providers/AntlProvider',
+    '@adonisjs/mail/providers/MailProvider',
+    '@adonisjs/queue/providers/QueueProvider',
+    'App/Providers/DatabaseServiceProvider' // This line registers your DatabaseServiceProvider
+  ]
 }
