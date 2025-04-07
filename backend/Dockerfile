@@ -1,15 +1,16 @@
-# Stage 1: Build backend
+
 FROM node:18-alpine AS backend-builder
 
 WORKDIR /app
 
-COPY backend/package*.json ./
+COPY package*.json ./
 RUN npm install --production
 
-COPY backend .
+COPY . .
+
+RUN npm run build
 
 
-# Stage 2: Run backend
 FROM node:18-alpine
 
 WORKDIR /app
