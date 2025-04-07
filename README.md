@@ -34,7 +34,9 @@ Deployment
 Once I connect the GitHub repo to Render it will recognize the Dockerfile
 
 
-Hosting URL: https://ai-chatbot-226o.onrender.com
+Hosting URL: 
+backend: https://ai-chatbot-226o.onrender.com
+frontend: https://frontend.onrender.com
 
 
 
