@@ -1,25 +1,63 @@
 'use strict'
 
+/** @type {import('@adonisjs/framework/src/Server')} */
+const Server = use('Server')
+
 /*
 |--------------------------------------------------------------------------
-| Http server
+| Global Middleware
 |--------------------------------------------------------------------------
 |
-| This file bootstraps Adonisjs to start the HTTP server. You are free to
-| customize the process of booting the http server.
+| Global middleware are executed on each http request only when the routes
+| match.
 |
-| """ Loading ace commands """
-|     At times you may want to load ace commands when starting the HTTP server.
-|     Same can be done by chaining `loadCommands()` method after
-|
-| """ Preloading files """
-|     Also you can preload files by calling `preLoad('path/to/file')` method.
-|     Make sure to pass a relative path from the project root.
 */
+const globalMiddleware = [
+  'Adonis/Middleware/BodyParser',
+  'Adonis/Middleware/Shield',
+  'Adonis/Middleware/Static',
+  'App/Middleware/ConvertEmptyStringsToNull',
+  'Adonis/Middleware/Cors'
+]
 
-const { Ignitor } = require('@adonisjs/ignitor')
+/*
+|--------------------------------------------------------------------------
+| Named Middleware
+|--------------------------------------------------------------------------
+|
+| Named middleware is key/value object to conditionally add middleware on
+| specific routes or group of routes.
+|
+| // define
+| {
+|   auth: 'Adonis/Middleware/Auth'
+| }
+|
+| // use
+| Route.get().middleware('auth')
+|
+*/
+const namedMiddleware = {
+  auth: 'Adonis/Middleware/Auth',
+  guest: 'Adonis/Middleware/AllowGuestOnly'
+}
 
-new Ignitor(require('@adonisjs/fold'))
-  .appRoot(__dirname)
-  .fireHttpServer()
-  .catch(console.error)
+/*
+|--------------------------------------------------------------------------
+| Server Middleware
+|--------------------------------------------------------------------------
+|
+| Server level middleware are executed even when route for a given URL is
+| not registered. Features like `static assets` and `cors` needs better
+| control over request lifecycle.
+|
+*/
+const serverMiddleware = [
+  // 'Adonis/Middleware/Static',
+  'Adonis/Middleware/Cors'
+]
+
+Server
+  .registerGlobal(globalMiddleware)
+  .registerNamed(namedMiddleware)
+  .use(serverMiddleware)
