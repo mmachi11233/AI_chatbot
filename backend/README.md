@@ -1,26 +1,39 @@
-Project Title: Ai chatbot
+Project Title: AI chatbot 
 
 
 Overview
 
 
-This is a web application featuring a chatbot and a basic CMS built using Adonisjs for backend and React + Typescript for the front end. It also includes a React Native mobile app. The CMS is used to manage content that the chatbot can use to provide replies to user queries.
+This is a web application and mobile app featuring a chatbot and a basic CMS built using Adonisjs for backend and React + Typescript for the front end. It also includes a React Native mobile app. The CMS is used to manage content that the chatbot can use to provide replies to user queries.
 
 
 Running Locally
 
 
-1. Clone: `git clone [Your Repository URL Here]`
+1. Clone: `git clone https://github.com/mmachi11233/AI_chatbot`
 
-2. Navigate: `cd [Your Project Directory Name]`
+2. Navigate: `cd AI_Chatbot`
 
-3. Install: `npm install` and Nodejs version 18 or higher
+3. To build the docker image 'docker build -t backend-image' 
 
-4. Environment: Create `.env` based on `.env.example` and set necessary variables (e.g., `PORT`, `DATABASE_URL`, API keys).
+4. Run the docker container 'docker run -p 4000:3333 backend-image'
 
-5. Run: `npm run dev`
+this will expose the backend on http://localhost:4000
 
-6. Run front end: npm start
+5. Build and run the front-end 
+
+docker build -t frontend-image ./chatbot-app
+
+docker run -p 3000:80 frontend-image
+
+
+Access the app:
+ Backend URL: http://localhost:4000
+
+Frontend URL: http://localhost:3000
+
+
+
 
 
 Deployment
@@ -36,10 +49,9 @@ Deployment
 Once I connect the GitHub repo to Render it will recognize the Dockerfile
 
 
-Set up secrets in your repository (e.g., hosting API key, database URL).
+Hosting URL: https://ai-chatbot-226o.onrender.com
 
 
-Hosting URL: `[Your Deployed Application URL Here]` (if deployed)
 
 
 CMS and Chatbot Integration
@@ -49,7 +61,7 @@ CMS and Chatbot Integration
 
 · It then checks for matching keywords in the Mongodb database with predefined responses
 
-· Content relevant to the chatbot is managed within the CMS in [Specify location or content type in CMS].
+· Content relevant to the chatbot is managed within the CMS.
 
 · When a user interacts with the chatbot, by imputing a message this triggers a CMS lookup
 
