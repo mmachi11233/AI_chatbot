@@ -12,19 +12,34 @@ Running Locally
 
 1. Clone: `git clone https://github.com/mmachi11233/AI_chatbot`
 
-2. Install: `npm install` and install Nodejs version 18 or higher
+2. Navigate: `cd AI_Chatbot`
 
-3. Environment: Create `.env` set necessary variables (e.g., `PORT`, `DATABASE_URL`, API keys).
+3. To build the docker image 'docker build -t backend-image' 
 
-4. Run: `adonis serve --dev`
+4. Run the docker container 'docker run -p 4000:3333 backend-image'
 
-5. Run front end: npm start
+this will expose the backend on http://localhost:4000
+
+5. Build and run the front-end 
+
+docker build -t frontend-image ./chatbot-app
+
+docker run -p 3000:80 frontend-image
+
+
+Access the app:
+ Backend URL: http://localhost:4000
+
+Frontend URL: http://localhost:3000
+
+
+
 
 
 Deployment
 
 
-· Containerized app using Docker by creating a docker container
+· Containerized app using Docker by creating a docker file
 
 · Hosted code with GitHub which serves as a central version control system
 
@@ -34,9 +49,7 @@ Deployment
 Once I connect the GitHub repo to Render it will recognize the Dockerfile
 
 
-Hosting URL: 
-backend: https://ai-chatbot-226o.onrender.com
-frontend: https://frontend.onrender.com
+Hosting URL: https://ai-chatbot-1-xgr6.onrender.com
 
 
 
